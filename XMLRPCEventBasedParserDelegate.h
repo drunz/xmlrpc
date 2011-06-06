@@ -28,6 +28,7 @@ typedef enum {
     XMLRPCElementTypeMember,
     XMLRPCElementTypeName,
     XMLRPCElementTypeInteger,
+    XMLRPCElementTypeLong,
     XMLRPCElementTypeDouble,
     XMLRPCElementTypeBoolean,
     XMLRPCElementTypeString,

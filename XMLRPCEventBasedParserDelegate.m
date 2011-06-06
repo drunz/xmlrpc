@@ -39,6 +39,8 @@
 
 - (NSNumber *)parseInteger: (NSString *)value;
 
+- (NSNumber *)parseLong: (NSString *)value;
+
 - (NSNumber *)parseDouble: (NSString *)value;
 
 - (NSNumber *)parseBoolean: (NSString *)value;
@@ -173,6 +175,8 @@
         [self setElementType: XMLRPCElementTypeDictionary];
     } else if ([element isEqualToString: @"int"] || [element isEqualToString: @"i4"]) {
         [self setElementType: XMLRPCElementTypeInteger];
+    } else if ([element isEqualToString: @"i8"]) {
+        [self setElementType: XMLRPCElementTypeLong];
     } else if ([element isEqualToString: @"double"]) {
         [self setElementType: XMLRPCElementTypeDouble];
     } else if ([element isEqualToString: @"boolean"]) {
@@ -201,6 +205,12 @@
         switch (myElementType) {
             case XMLRPCElementTypeInteger:
                 myElementValue = [self parseInteger: elementValue];
+                
+                [myElementValue retain];
+                
+                break;
+            case XMLRPCElementTypeLong:
+                myElementValue = [self parseLong: elementValue];
                 
                 [myElementValue retain];
                 
@@ -324,6 +334,10 @@
 
 - (NSNumber *)parseInteger: (NSString *)value {
     return [NSNumber numberWithInteger: [value integerValue]];
+}
+
+- (NSNumber *)parseLong: (NSString *)value {
+    return [NSNumber numberWithLongLong: [value longLongValue]];
 }
 
 - (NSNumber *)parseDouble: (NSString *)value {
